@@ -1,0 +1,211 @@
+
+//Hacim Hesaplama
+package zeki;
+
+import javax.swing.JOptionPane;
+
+public class ornek {
+
+    public static void main(String[] args) {
+
+        String Sekil, Sorular = "";
+        char Secilen;
+
+        do {
+
+            Sekil = "Hacmini Hesaplamak İstediğiniz Sekli Seçin:n";
+            Sekil += "1. Küpn";
+            Sekil += "2. Dikdörtgenler Prizmasın";
+            Sekil += "3. Silindirn";
+            Sekil += "4. Küren";
+            Sekil += "Şekil Nosunu Girinizn";
+            Secilen = JOptionPane.showInputDialog(Sekil).charAt(0);
+
+
+        } while (Secilen < '1' || Secilen > '4');
+
+        switch (Secilen) {
+            case '1':
+
+                String uzn;
+
+                int a;
+                int cozum;
+
+                uzn = JOptionPane.showInputDialog("Bir Kenarın Uzunluğunu Girin");
+
+
+                a = Integer.parseInt(uzn);
+
+
+                cozum = a * a * a;
+
+                JOptionPane.showMessageDialog(null, cozum + " " + "SantimetreKüp");
+
+                break;
+            case '2':
+
+                String uzunluk;
+                String genislik;
+                String yukseklik;
+
+                int sayi1;
+                int sayi2;
+                int sayi3;
+                int cevap;
+
+                uzunluk = JOptionPane.showInputDialog("Uzunluğu Girin");
+                genislik = JOptionPane.showInputDialog("Genişliği Girin");
+                yukseklik = JOptionPane.showInputDialog("Yüksekliği Girin");
+
+                sayi1 = Integer.parseInt(uzunluk);
+                sayi2 = Integer.parseInt(genislik);
+                sayi3 = Integer.parseInt(yukseklik);
+
+                cevap = sayi1 * sayi2 * sayi3;
+
+                JOptionPane.showMessageDialog(null, cevap + " " + "SantimetreKüp");
+
+                break;
+            case '3':
+                String yk;
+                String yc;
+                int r;
+                int h;
+                int sonuc;
+
+                yk = JOptionPane.showInputDialog("Yüksekliği Girin");
+                yc = JOptionPane.showInputDialog("Yarıçapı Girin");
+
+                h = Integer.parseInt(yk);
+                r = Integer.parseInt(yc);
+
+
+                sonuc = 3 * r * r*h;
+
+                JOptionPane.showMessageDialog(null, sonuc + " " + "SantimetreKüp");
+                break;
+            case '4':
+
+
+                String yarıcap;
+                int r2;
+                
+                int snc;
+
+
+                yarıcap = JOptionPane.showInputDialog("Yarıçapı Girin");
+
+
+                r2 = Integer.parseInt(yarıcap);
+
+
+                snc = 4/3*3*r2*r2*r2;
+
+                JOptionPane.showMessageDialog(null, snc + " " + "SantimetreKüp");
+                
+                break;
+            
+
+        }
+
+
+    }
+}
+
+
+
+
+
+
+
+//Uygulama
+package zeki;
+
+import java.awt.BorderLayout;
+import java.util.Scanner;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.awt.event.ActionEvent;
+public class zeki extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private Scanner yasal;
+
+
+ 	public static void main(String[] args) {
+ 		EventQueue.invokeLater(new Runnable() {
+ 			public void run() {
+ 				try {
+ 				zeki frame = new zeki();
+ 					frame.setVisible(true);
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+ 			}
+ 		});
+ 	}
+
+ 	public zeki() {
+ 		ArrayList<Double> liste = new ArrayList<>();
+ 		ArrayList<Double> asallar = new ArrayList<>();
+ 		
+ 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 		setBounds(500, 300, 300, 180);
+ 		contentPane = new JPanel();
+ 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+ 		setContentPane(contentPane);
+ 		contentPane.setLayout(null);
+ 		
+ 		textField = new JTextField();
+ 		textField.setBounds(90, 30, 116, 22);
+ 		contentPane.add(textField);
+ 		textField.setColumns(10);
+ 		
+ 		JButton buton = new JButton("EKLE");
+ 		buton.addActionListener(new ActionListener() {int counter = 0;
+ 		int toplam = 0;
+ 			public void actionPerformed(ActionEvent arg0) {
+ 				liste.add((double) Integer.parseInt(textField.getText()));
+ 				textField.setText("");
+ 				counter++;
+ 				if(counter==10) {
+ 					buton.setEnabled(false);
+ 					for(double i:liste) {
+ 						toplam+=i;
+ 						
+ 					}
+ 					for(double a:liste) {
+ 						for(double d=2; d<=a;d++) {
+ 							if(a%d==0) {
+ 								break;
+ 							}asallar.add(a);
+ 							break;
+ 						}
+ 					}
+ 					Collections.sort(liste);
+ 					Collections.sort(asallar);
+ 					JOptionPane.showMessageDialog(null,"En Küçük Sayı: " + Collections.min(liste));
+ 					JOptionPane.showMessageDialog(null,"En Büyük Sayı: " + Collections.max(liste));
+ 					JOptionPane.showMessageDialog(null,"Sayıların sıralanmış Hali: " + liste);
+ 					JOptionPane.showMessageDialog(null,"Sayıların Ortalaması: " + (toplam/liste.size()));
+ 					JOptionPane.showMessageDialog(null,"Dizideki Asal Sayılar: " + asallar);
+ 					}
+ 			}
+ 		});
+ 		buton.setBounds(100, 70, 97, 50);
+ 		contentPane.add(buton);
+ 		
+ 	}
+ 
+ }
